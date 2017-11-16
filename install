@@ -1,0 +1,23 @@
+#!/bin/bash
+
+echo -e "\e[1;36mPreparation! READ README before installation!\e[0m"
+
+ADDRESS="google.com.ua"
+if ping -c 1 -s 1 -W 1 $ADDRESS
+then
+echo -e "\e[1;32mConnection OK!\e[0m"
+echo "Network OK!" >> /tmp/bootlog/logboot.txt
+else
+echo -e "\e[1;31mConnection Lost!!!\e[0m"
+echo -e "\e[1;33mCheck network connection!\e[0m"
+echo "Network faill" >> /tmp/bootlog/logboot.txt
+exit
+fi
+
+sudo mkdir /tmp/boot
+sudo mkdir /tmp/bootlog
+
+cd /tmp/ && git clone https://github.com/vilerd/web_master.git && cd
+
+chmod +x webmaster.sh
+./webmaster.sh
